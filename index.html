@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gabriel Curtis</title>
+ 
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+ 
+  <style>
+    :root {
+      --navy: #0a1628;
+      --gold: #c9a84c;
+      --light-bg: #f8f6f1;
+      --text-muted-custom: #6b7280;
+    }
+ 
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--navy);
+    }
+ 
+    /* NAVBAR */
+    .navbar {
+      background-color: var(--navy) !important;
+      padding: 1rem 2rem;
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold) !important;
+      letter-spacing: 0.5px;
+    }
+    .nav-link {
+      color: #cbd5e1 !important;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--gold) !important;
+    }
+ 
+    /* HERO */
+    .hero {
+      background-color: var(--navy);
+      color: white;
+      padding: 100px 0 80px;
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+      margin-bottom: -30px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      line-height: 1.15;
+      color: white;
+    }
+    .hero h1 span {
+      color: var(--gold);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      font-weight: 300;
+      max-width: 520px;
+    }
+    .btn-gold {
+      background-color: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      border: none;
+      padding: 0.65rem 1.8rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .btn-gold:hover {
+      background-color: #b8942e;
+      color: var(--navy);
+      transform: translateY(-1px);
+    }
+    .btn-outline-light-custom {
+      border: 2px solid #cbd5e1;
+      color: #cbd5e1;
+      font-weight: 600;
+      padding: 0.65rem 1.8rem;
+      border-radius: 4px;
+      background: transparent;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline-light-custom:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+ 
+    /* AVATAR INITIALS */
+    .avatar-circle {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #e8c96a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: var(--navy);
+      font-weight: 700;
+      border: 5px solid rgba(255,255,255,0.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      margin: 0 auto;
+    }
+ 
+    /* SECTIONS */
+    section {
+      padding: 70px 0;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+    .section-line {
+      width: 50px;
+      height: 3px;
+      background-color: var(--gold);
+      margin-bottom: 2rem;
+    }
+ 
+    /* CARDS */
+    .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 2px 16px rgba(10,22,40,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      background-color: white;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(10,22,40,0.13);
+    }
+    .card-icon {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+ 
+    /* SKILLS BADGES */
+    .skill-badge {
+      display: inline-block;
+      background-color: var(--navy);
+      color: white;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin: 0.3rem;
+    }
+ 
+    /* FOOTER */
+    footer {
+      background-color: var(--navy);
+      color: #94a3b8;
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.92rem;
+    }
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .social-icon {
+      font-size: 1.5rem;
+      color: #94a3b8;
+      margin: 0 0.5rem;
+      transition: color 0.2s;
+    }
+    .social-icon:hover {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+ 
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Gabriel Curtis</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+          <li class="nav-item"><a class="nav-link" href="golf.html">Golf</a></li>
+          <li class="nav-item"><a class="nav-link" href="app.html">App</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <p class="text-uppercase fw-600 mb-2" style="color: var(--gold); letter-spacing:2px; font-size:0.85rem;">Accounting Student · BYU</p>
+          <h1>Hi, I'm <span>Gabriel Curtis</span></h1>
+          <p class="mt-3">
+            I'm a sophomore accounting student at Brigham Young University with a passion for helping others and building genuine connections with the people around me.
+          </p>
+          <div class="mt-4 d-flex flex-wrap gap-3">
+            <a href="resume.html" class="btn-gold">View My Résumé</a>
+            <a href="golf.html" class="btn-outline-light-custom">My Passion for Golf</a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-center">
+          <div class="avatar-circle">GC</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ABOUT -->
+  <section style="padding-top: 90px;">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card p-4 h-100">
+            <div class="card-icon"><i class="bi bi-mortarboard-fill"></i></div>
+            <h5 class="fw-bold">Education</h5>
+            <p class="text-muted mb-0">Sophomore studying Accounting at Brigham Young University in Provo, Utah.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-4 h-100">
+            <div class="card-icon"><i class="bi bi-briefcase-fill"></i></div>
+            <h5 class="fw-bold">Experience</h5>
+            <p class="text-muted mb-0">Account Manager at Brooks Pest Solutions with hands-on experience in door-to-door sales.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-4 h-100">
+            <div class="card-icon"><i class="bi bi-people-fill"></i></div>
+            <h5 class="fw-bold">People Person</h5>
+            <p class="text-muted mb-0">I thrive on genuine connection — whether that's with clients, teammates, or friends.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- SKILLS -->
+  <section style="background-color: white;">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+      <div>
+        <span class="skill-badge">Negotiation</span>
+        <span class="skill-badge">Sales</span>
+        <span class="skill-badge">Client Relations</span>
+        <span class="skill-badge">Accounting</span>
+        <span class="skill-badge">Financial Analysis</span>
+        <span class="skill-badge">Communication</span>
+        <span class="skill-badge">Microsoft Excel</span>
+        <span class="skill-badge">Problem Solving</span>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="mb-3">
+        <a href="https://www.linkedin.com" target="_blank" class="social-icon"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.github.com" target="_blank" class="social-icon"><i class="bi bi-github"></i></a>
+        <a href="mailto:gabriel@example.com" class="social-icon"><i class="bi bi-envelope-fill"></i></a>
+      </div>
+      <p class="mb-0">&copy; 2025 Gabriel Curtis &middot; <a href="resume.html">Résumé</a> &middot; <a href="golf.html">Golf</a></p>
+    </div>
+  </footer>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

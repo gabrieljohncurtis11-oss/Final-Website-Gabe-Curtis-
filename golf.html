@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Golf | Gabriel Curtis</title>
+
+  <!-- Custom Stylesheet (from scratch) -->
+  <link rel="stylesheet" href="golf.css"/>
+
+  <!-- Tableau Script for embedded viz -->
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <a class="brand" href="index.html">Gabriel Curtis</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Résumé</a>
+      <a href="golf.html">Golf</a>
+      <a href="app.html">App</a>
+    </div>
+  </nav>
+
+  <!-- HERO with on-page anchor button -->
+  <div class="hero">
+    <h1>⛳ The Game of Golf</h1>
+    <p>Golf isn't just a sport — it's a mindset. A love letter to patience, precision, and the pursuit of something better.</p>
+    <!-- ON-PAGE ANCHOR LINK -->
+    <a href="#why-golf" class="anchor-btn">Why I Love Golf ↓</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-wrapper">
+
+    <!-- ABOUT GOLF - on-page anchor target -->
+    <div class="about-section" id="why-golf">
+      <h2 class="section-title">Why I Love Golf</h2>
+      <p>
+        Golf has a way of humbling you. One great round can make you feel unstoppable, and the next one brings you right back down to earth. That tension — between confidence and humility — is what keeps me coming back.
+      </p>
+      <p>
+        There's something uniquely satisfying about a sport where you compete against yourself as much as anyone else. Every shot is a small problem to solve: distance, wind, lie, club selection. It rewards preparation, focus, and composure under pressure — skills that honestly translate into everything else in life.
+      </p>
+      <p>
+        I started playing seriously in high school and haven't stopped since. Whether it's a casual round with friends or grinding out a tight back nine, golf is one of my favorite ways to spend a day.
+      </p>
+    </div>
+
+    <!-- IMAGE -->
+    <div class="image-section">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Golfer_at_Gullane_Golf_Course_-_geograph.org.uk_-_1070385.jpg/1280px-Golfer_at_Gullane_Golf_Course_-_geograph.org.uk_-_1070385.jpg"
+        alt="Golfer mid-swing on a scenic course"
+      />
+      <p class="caption">The perfect swing — a lifetime in the making.</p>
+    </div>
+
+    <!-- NESTED LISTS -->
+    <div class="lists-section">
+      <h2 class="section-title">What Makes Golf Great</h2>
+      <ol>
+        <li>The Mental Game
+          <ul>
+            <li>Staying calm after a bad shot</li>
+            <li>Visualizing the shot before you swing</li>
+            <li>Managing your emotions across 18 holes</li>
+          </ul>
+        </li>
+        <li>The Technical Craft
+          <ul>
+            <li>Club selection and distance control</li>
+            <li>Reading greens and understanding break</li>
+            <li>Shot shaping — draws, fades, and punches</li>
+          </ul>
+        </li>
+        <li>The Experience
+          <ul>
+            <li>Beautiful courses and early morning tee times</li>
+            <li>Competing with friends in a casual round</li>
+            <li>The feeling of a perfectly struck iron</li>
+          </ul>
+        </li>
+        <li>The Culture
+          <ul>
+            <li>Etiquette and respect for the game</li>
+            <li>Watching the Masters and the majors</li>
+            <li>Following pros like Rory, Scottie, and Scheffler</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <!-- YOUTUBE VIDEO -->
+    <div class="video-section">
+      <h2 class="section-title">Watch: The Beauty of Golf</h2>
+      <p>Some of the most iconic shots in golf history — a reminder of why we love this game.</p>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/gGMkHzWXjI8"
+          title="Greatest Golf Shots Ever"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- TABLEAU GRAPH -->
+    <div class="tableau-section">
+      <h2 class="section-title">Golf By the Numbers</h2>
+      <p>An interactive look at PGA Tour driving distance trends over the years — data straight from the tour.</p>
+      <div class="tableau-wrapper">
+        <tableau-viz
+          src="https://public.tableau.com/views/PGATourDrivingDistanceTrends/DrivingDistance"
+          width="100%"
+          height="500"
+          toolbar="bottom"
+          hide-tabs>
+        </tableau-viz>
+      </div>
+      <p style="font-size:0.82rem; color:#5a7a5a; margin-top:0.5rem; font-family:Arial,sans-serif;">
+        * If the Tableau viz doesn't load locally, it will work once the site is hosted on GitHub Pages.
+      </p>
+    </div>
+
+    <!-- LINK TO APP -->
+    <div class="about-section" style="text-align:center;">
+      <h2 class="section-title" style="text-align:left;">Want to Track Your Round?</h2>
+      <p style="font-family:Arial,sans-serif; color:#d4e8d4;">
+        I built a Golf Stat Tracker app where you can log your scores, track fairways hit, greens in regulation, and putts — and see your stats over time.
+      </p>
+      <a href="app.html" style="display:inline-block; margin-top:1rem; background-color:#c9a84c; color:#0f1f0f; padding:0.65rem 2rem; border-radius:4px; text-decoration:none; font-family:Arial,sans-serif; font-weight:700;">
+        Try the Golf Stat Tracker →
+      </a>
+    </div>
+
+  </div><!-- end content-wrapper -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>&copy; 2025 Gabriel Curtis &middot; <a href="index.html">Home</a> &middot; <a href="resume.html">Résumé</a> &middot; <a href="app.html">Golf App</a></p>
+  </div>
+
+</body>
+</html>

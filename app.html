@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Golf Stat Tracker | Gabriel Curtis</title>
+ 
+  <style>
+    :root {
+      --green-dark: #0f1f0f;
+      --green-mid: #1a3a1a;
+      --green-light: #12261a;
+      --gold: #c9a84c;
+      --gold-hover: #b8942e;
+      --text-light: #f0ede4;
+      --text-muted: #a8c4a8;
+      --card-bg: #12261a;
+      --border: #2a4a2a;
+    }
+ 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--green-dark);
+      color: var(--text-light);
+      min-height: 100vh;
+    }
+ 
+    /* NAVBAR */
+    .navbar {
+      background-color: #0a1508;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--gold);
+    }
+    .navbar .brand {
+      font-family: 'Georgia', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .navbar .nav-links a {
+      color: #c8d8c8;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .navbar .nav-links a:hover { color: var(--gold); }
+ 
+    /* HEADER */
+    .page-header {
+      background: linear-gradient(135deg, #0a1508, var(--green-mid));
+      text-align: center;
+      padding: 50px 2rem 40px;
+      border-bottom: 2px solid var(--border);
+    }
+    .page-header h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+ 
+    /* MAIN LAYOUT */
+    .main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 1.5rem 60px;
+    }
+ 
+    /* STAT SUMMARY CARDS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .stat-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
+    .stat-card .stat-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: 'Georgia', serif;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-card .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+ 
+    /* SECTION TITLES */
+    .section-title {
+      font-family: 'Georgia', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+ 
+    /* FORM */
+    .form-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-group input {
+      background-color: #0f1f0f;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem 0.85rem;
+      color: var(--text-light);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus {
+      border-color: var(--gold);
+    }
+    .form-group input::placeholder {
+      color: #4a6a4a;
+    }
+ 
+    /* HELPER TEXT */
+    .helper-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .helper-text {
+      font-size: 0.78rem;
+      color: #4a6a4a;
+      margin-top: 0.2rem;
+    }
+ 
+    /* SUBMIT BUTTON */
+    .btn-submit {
+      background-color: var(--gold);
+      color: var(--green-dark);
+      border: none;
+      padding: 0.75rem 2.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .btn-submit:hover {
+      background-color: var(--gold-hover);
+      transform: translateY(-1px);
+    }
+ 
+    /* SUCCESS MESSAGE */
+    .success-msg {
+      display: none;
+      background-color: #1a4a1a;
+      border: 1px solid #3a8a3a;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      color: #7adf7a;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+ 
+    /* ROUNDS TABLE */
+    .rounds-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    thead tr {
+      border-bottom: 2px solid var(--gold);
+    }
+    thead th {
+      color: var(--gold);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.15s;
+    }
+    tbody tr:hover {
+      background-color: #1a3a1a;
+    }
+    tbody td {
+      padding: 0.75rem;
+      color: var(--text-light);
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .badge-good { background-color: #1a4a1a; color: #7adf7a; }
+    .badge-avg  { background-color: #3a3a1a; color: #dfdf7a; }
+    .badge-bad  { background-color: #4a1a1a; color: #df7a7a; }
+ 
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 2.5rem 0;
+      font-size: 0.95rem;
+    }
+    .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+ 
+    /* DELETE BUTTON */
+    .btn-delete {
+      background: none;
+      border: 1px solid #4a2a2a;
+      color: #df7a7a;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+    .btn-delete:hover { background-color: #4a1a1a; }
+ 
+    /* FOOTER */
+    .footer {
+      background-color: #0a1508;
+      border-top: 2px solid var(--border);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.88rem;
+      color: #4a6a4a;
+    }
+    .footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+ 
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="brand" href="index.html">Gabriel Curtis</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Résumé</a>
+      <a href="golf.html">Golf</a>
+      <a href="app.html">App</a>
+    </div>
+  </nav>
+ 
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>⛳ Golf Stat Tracker</h1>
+    <p>Log your rounds, track your progress, and see where your game stands.</p>
+  </div>
+ 
+  <div class="main">
+ 
+    <!-- SUMMARY STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-rounds">0</div>
+        <div class="stat-label">Rounds Played</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-avg-score">—</div>
+        <div class="stat-label">Avg Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-best">—</div>
+        <div class="stat-label">Best Round</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-fir">—</div>
+        <div class="stat-label">Avg Fairways Hit</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-gir">—</div>
+        <div class="stat-label">Avg GIR</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-putts">—</div>
+        <div class="stat-label">Avg Putts</div>
+      </div>
+    </div>
+ 
+    <!-- LOG A ROUND -->
+    <h2 class="section-title">Log a Round</h2>
+    <div class="form-card">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="input-date"/>
+        </div>
+        <div class="form-group">
+          <label>Course Name</label>
+          <input type="text" id="input-course" placeholder="e.g. Riverside Golf Course"/>
+        </div>
+        <div class="form-group">
+          <label>Score</label>
+          <input type="number" id="input-score" placeholder="e.g. 82" min="50" max="150"/>
+        </div>
+        <div class="form-group">
+          <label>Par</label>
+          <input type="number" id="input-par" placeholder="e.g. 72" min="60" max="74" value="72"/>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Fairways Hit</label>
+          <input type="number" id="input-fir" placeholder="e.g. 9" min="0" max="18"/>
+          <span class="helper-text">Out of 14 driveable fairways</span>
+        </div>
+        <div class="form-group">
+          <label>Greens in Regulation</label>
+          <input type="number" id="input-gir" placeholder="e.g. 10" min="0" max="18"/>
+          <span class="helper-text">Out of 18 holes</span>
+        </div>
+        <div class="form-group">
+          <label>Total Putts</label>
+          <input type="number" id="input-putts" placeholder="e.g. 32" min="10" max="60"/>
+          <span class="helper-text">Across all 18 holes</span>
+        </div>
+        <div class="form-group">
+          <label>Notes (optional)</label>
+          <input type="text" id="input-notes" placeholder="e.g. Windy day, back 9 struggles"/>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="logRound()">Log Round</button>
+      <div class="success-msg" id="success-msg">✅ Round logged successfully!</div>
+    </div>
+ 
+    <!-- ROUND HISTORY -->
+    <h2 class="section-title">Round History</h2>
+    <div class="rounds-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Course</th>
+            <th>Score</th>
+            <th>+/- Par</th>
+            <th>FIR</th>
+            <th>GIR</th>
+            <th>Putts</th>
+            <th>Notes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="rounds-body">
+          <tr>
+            <td colspan="9">
+              <div class="empty-state">
+                <div class="icon">⛳</div>
+                <p>No rounds logged yet. Add your first round above!</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ 
+  </div>
+ 
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>&copy; 2025 Gabriel Curtis &middot; <a href="index.html">Home</a> &middot; <a href="golf.html">Golf Page</a></p>
+  </div>
+ 
+  <script>
+    // ---- DATA ----
+    let rounds = JSON.parse(localStorage.getItem('golfRounds') || '[]');
+ 
+    // Set today's date as default
+    document.getElementById('input-date').valueAsDate = new Date();
+ 
+    // ---- LOG A ROUND ----
+    function logRound() {
+      const date    = document.getElementById('input-date').value;
+      const course  = document.getElementById('input-course').value.trim();
+      const score   = parseInt(document.getElementById('input-score').value);
+      const par     = parseInt(document.getElementById('input-par').value) || 72;
+      const fir     = parseInt(document.getElementById('input-fir').value);
+      const gir     = parseInt(document.getElementById('input-gir').value);
+      const putts   = parseInt(document.getElementById('input-putts').value);
+      const notes   = document.getElementById('input-notes').value.trim();
+ 
+      if (!date || !course || isNaN(score)) {
+        alert('Please fill in at least the date, course name, and score.');
+        return;
+      }
+ 
+      rounds.push({ date, course, score, par, fir, gir, putts, notes });
+      localStorage.setItem('golfRounds', JSON.stringify(rounds));
+ 
+      // Clear fields
+      document.getElementById('input-course').value = '';
+      document.getElementById('input-score').value  = '';
+      document.getElementById('input-fir').value    = '';
+      document.getElementById('input-gir').value    = '';
+      document.getElementById('input-putts').value  = '';
+      document.getElementById('input-notes').value  = '';
+ 
+      // Show success
+      const msg = document.getElementById('success-msg');
+      msg.style.display = 'block';
+      setTimeout(() => msg.style.display = 'none', 3000);
+ 
+      renderAll();
+    }
+ 
+    // ---- DELETE A ROUND ----
+    function deleteRound(index) {
+      rounds.splice(index, 1);
+      localStorage.setItem('golfRounds', JSON.stringify(rounds));
+      renderAll();
+    }
+ 
+    // ---- RENDER TABLE ----
+    function renderTable() {
+      const tbody = document.getElementById('rounds-body');
+      if (rounds.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9"><div class="empty-state"><div class="icon">⛳</div><p>No rounds logged yet. Add your first round above!</p></div></td></tr>`;
+        return;
+      }
+ 
+      // Sort newest first
+      const sorted = [...rounds].map((r, i) => ({...r, origIndex: i}))
+                                .sort((a, b) => new Date(b.date) - new Date(a.date));
+ 
+      tbody.innerHTML = sorted.map(r => {
+        const diff    = r.score - r.par;
+        const diffStr = diff === 0 ? 'E' : (diff > 0 ? '+' + diff : diff);
+        const badge   = diff <= 0 ? 'badge-good' : diff <= 5 ? 'badge-avg' : 'badge-bad';
+        const fir     = isNaN(r.fir)   ? '—' : r.fir + '/14';
+        const gir     = isNaN(r.gir)   ? '—' : r.gir + '/18';
+        const putts   = isNaN(r.putts) ? '—' : r.putts;
+        const dateStr = r.date ? new Date(r.date + 'T00:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : '—';
+ 
+        return `<tr>
+          <td>${dateStr}</td>
+          <td>${r.course}</td>
+          <td><strong>${r.score}</strong></td>
+          <td><span class="badge ${badge}">${diffStr}</span></td>
+          <td>${fir}</td>
+          <td>${gir}</td>
+          <td>${putts}</td>
+          <td style="font-size:0.85rem; color:#7a9a7a;">${r.notes || '—'}</td>
+          <td><button class="btn-delete" onclick="deleteRound(${r.origIndex})">✕</button></td>
+        </tr>`;
+      }).join('');
+    }
+ 
+    // ---- RENDER SUMMARY STATS ----
+    function renderStats() {
+      const n = rounds.length;
+      document.getElementById('stat-rounds').textContent = n;
+ 
+      if (n === 0) {
+        ['stat-avg-score','stat-best','stat-fir','stat-gir','stat-putts']
+          .forEach(id => document.getElementById(id).textContent = '—');
+        return;
+      }
+ 
+      const scores = rounds.map(r => r.score);
+      const avg    = r => rounds.filter(x => !isNaN(x[r])).map(x => x[r]);
+ 
+      document.getElementById('stat-avg-score').textContent =
+        (scores.reduce((a,b) => a+b, 0) / n).toFixed(1);
+ 
+      document.getElementById('stat-best').textContent = Math.min(...scores);
+ 
+      const firArr = avg('fir');
+      document.getElementById('stat-fir').textContent =
+        firArr.length ? (firArr.reduce((a,b)=>a+b,0)/firArr.length).toFixed(1) : '—';
+ 
+      const girArr = avg('gir');
+      document.getElementById('stat-gir').textContent =
+        girArr.length ? (girArr.reduce((a,b)=>a+b,0)/girArr.length).toFixed(1) : '—';
+ 
+      const puttsArr = avg('putts');
+      document.getElementById('stat-putts').textContent =
+        puttsArr.length ? (puttsArr.reduce((a,b)=>a+b,0)/puttsArr.length).toFixed(1) : '—';
+    }
+ 
+    // ---- RENDER ALL ----
+    function renderAll() {
+      renderTable();
+      renderStats();
+    }
+ 
+    // Initial render
+    renderAll();
+  </script>
+ 
+</body>
+</html>
